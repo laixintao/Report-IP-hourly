@@ -91,7 +91,7 @@ def get_network_ip():
 if __name__ == '__main__':
     check_network()
     ipaddr=get_network_ip()
-    ip_file = open("lastip.txt")
+    ip_file = open(file_path)
     last_ip = ip_file.read()
     ip_file.close()
     if last_ip == ipaddr:

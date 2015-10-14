@@ -23,6 +23,9 @@ sender = "**********"
 receiver = ["*********"]
 subject = "[RPI]IP CHANGED"
 
+# file_path config
+file_path = "/root/rootcrons/lastip.txt"
+
 def sendEmail(msghtml):
     msgRoot = MIMEMultipart('related')
     msgRoot["To"] = ','.join(receiver)
@@ -95,7 +98,7 @@ if __name__ == '__main__':
         print "IP not change."
     else:
         print "IP changed."
-        ip_file = open("lastip.txt","w")
+        ip_file = open(file_path,"w")
         ip_file.write(str(ipaddr))
         ip_file.close()
 

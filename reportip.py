@@ -16,11 +16,12 @@ import re
 import urllib2
 
 # the e-mail config
+# this is just a simple format,this e-mail doesn't exist.
 smtpserver = "smtp.sina.com"
-username = "**********"
-password = "*************"
-sender = "**********"
-receiver = ["*********"]
+username = "reaspberrypi@sina.com"
+password = "123456"
+sender = "reaspberrypi@sina.com"
+receiver = ["receiver@sina.com","master@sina.com"]
 subject = "[RPI]IP CHANGED"
 
 # file_path config
@@ -51,7 +52,6 @@ def check_network():
            time.sleep(10)
     return True
 
-# get lan ip
 def get_lan_ip():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.connect(("1.1.1.1",80))
@@ -59,7 +59,6 @@ def get_lan_ip():
     s.close()
     return ipaddr
 
-# get network ip
 class Getmyip:
     def getip(self):
         try:
@@ -70,6 +69,8 @@ class Getmyip:
             except:
                 try:
                     myip = self.visit("http://www.whereismyip.com/")
+                    # if you want to add more,use the format "except try"
+                    # make sure the most useful link be the first
                 except:
                     print "Fail to get the Network ip."
                     print "Get the LAN ip."

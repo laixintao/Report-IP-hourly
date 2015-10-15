@@ -1,2 +1,2 @@
 # check ip hourly
-*/1 * * * * /usr/bin/python /root/rootcrons/reportip.py
+0 */1 * * * /usr/bin/python /root/rootcrons/reportip.py

@@ -4,7 +4,9 @@ This script could report ip to your email houly(or minutely,depent on your setti
 
 Use this script you could make your RaspberryPI a vps.Once you get the ip, you can use ssh to login.
 
+## GUIDE
 
+[中文指南](http://www.kawabangga.com/posts/1398) 
 
 ## useage
 	git clone https://github.com/laixintao/Report-IP-hourly.git /root/rootcrons/

@@ -92,6 +92,8 @@ def get_network_ip():
 if __name__ == '__main__':
     check_network()
     ipaddr=get_network_ip()
+    lanip=get_lan_ip()
+    emailip=str(ipaddr)+" "+str(lanip)
     ip_file = open(file_path)
     last_ip = ip_file.read()
     ip_file.close()
@@ -100,7 +102,7 @@ if __name__ == '__main__':
     else:
         print "IP changed."
         ip_file = open(file_path,"w")
-        ip_file.write(str(ipaddr))
+        ip_file.write(str(emailip))
         ip_file.close()
 
         sendEmail(ipaddr)

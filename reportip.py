@@ -97,7 +97,7 @@ if __name__ == '__main__':
     ip_file = open(file_path)
     last_ip = ip_file.read()
     ip_file.close()
-    if last_ip == ipaddr:
+    if last_ip == emailip:
         print "IP not change."
     else:
         print "IP changed."

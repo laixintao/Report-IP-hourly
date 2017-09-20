@@ -100,7 +100,7 @@ if __name__ == '__main__':
     if last_ip == emailip:
         print "IP not change."
     else:
-        print "IP changed."
+        print "IP changed. New ip: {}".format(emailip)
         ip_file = open(file_path,"w")
         ip_file.write(str(emailip))
         ip_file.close()

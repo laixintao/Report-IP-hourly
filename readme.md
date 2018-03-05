@@ -8,7 +8,7 @@ Use this script you could make your RaspberryPI a vps.Once you get the ip, you c
 
 [中文指南](http://www.kawabangga.com/posts/1398) 
 
-## useage
+## usage
 	git clone https://github.com/laixintao/Report-IP-hourly.git /root/rootcrons/
 	# change your e-mail config
 	# ..............done

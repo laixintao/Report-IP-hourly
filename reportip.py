@@ -105,5 +105,5 @@ if __name__ == '__main__':
         ip_file.write(str(emailip))
         ip_file.close()
 
-        sendEmail(ipaddr)
+        sendEmail(emailip)
         print "Successfully send the e-mail."

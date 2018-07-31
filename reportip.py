@@ -94,6 +94,7 @@ if __name__ == '__main__':
     ipaddr=get_network_ip()
     lanip=get_lan_ip()
     emailip=str(ipaddr)+" "+str(lanip)
+    print(emailip)
     ip_file = open(file_path)
     last_ip = ip_file.read()
     ip_file.close()

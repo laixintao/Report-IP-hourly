@@ -7,6 +7,7 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import re
+import logging as log
 try:
     from urllib import urlopen
 except ImportError:
@@ -27,6 +28,9 @@ subject = "[RPI]IP CHANGED"
 # file_path config
 file_path = "/root/rootcrons/lastip.txt"
 
+# log config
+log.basicConfig(level=log.DEBUG, format="%(asctime)-15s.%(msecs)03d %(levelname)-8s %(filename)s %(lineno)-3d %(process)d %(message)s",
+                    datefmt="%a %d %b %Y %H:%M:%S")
 
 def sendEmail(msghtml):
     msgRoot = MIMEMultipart("related")
@@ -45,11 +49,11 @@ def sendEmail(msghtml):
 def check_network():
     while True:
         try:
-            print("Network is Ready!")
+            log.debug("Network is Ready!")
             break
         except Exception as e:
-            print(e)
-            print("Network is not ready,Sleep 5s....")
+            log.error(e)
+            log.error("Network is not ready,Sleep 5s....")
             time.sleep(10)
     return True
 
@@ -68,18 +72,17 @@ class Getmyip:
         try:
             myip = self.visit("http://1111.ip138.com/ic.asp")
         except Exception as e:
-            print(e)
+            log.error(e)
             try:
                 myip = self.visit("http://ip.chinaz.com/")
             except Exception as e:
-                print(e)
+                log.error(e)
                 try:
                     myip = self.visit("http://www.whereismyip.com/")
                     # if you want to add more,use the format "except try"
                     # make sure the most useful link be the first
                 except:
-                    print("Fail to get the Network ip.")
-                    print("Get the LAN ip.")
+                    log.error("Fail to get the Network ip, Get the LAN ip.")
                     myip = get_lan_ip()
         return myip
 
@@ -87,7 +90,7 @@ class Getmyip:
         opener = urlopen(url)
         if url == opener.geturl():
             str = opener.read().decode()
-            print("IP information from", url)
+            log.debug("IP information from", url)
         return re.search("\d+\.\d+\.\d+\.\d+", str).group(0)
 
 
@@ -102,17 +105,17 @@ if __name__ == "__main__":
     ipaddr = get_network_ip()
     lanip = get_lan_ip()
     emailip = str(ipaddr) + " " + str(lanip)
-    print("Your ip is: ", emailip)
+    log.info("Your ip is: ", emailip)
     ip_file = open(file_path)
     last_ip = ip_file.read()
     ip_file.close()
     if last_ip == emailip:
-        print("IP not change.")
+        log.info("IP not change.")
     else:
-        print("IP changed. New ip: {}".format(emailip))
+        log.info("IP changed. New ip: {}".format(emailip))
         ip_file = open(file_path, "w")
         ip_file.write(str(emailip))
         ip_file.close()
 
         sendEmail(ipaddr)
-        print("Successfully send the e-mail.")
+        log.info("Successfully send the e-mail.")
